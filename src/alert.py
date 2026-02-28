@@ -33,7 +33,7 @@ import httpx
 import pathway as pw
 
 from src.backtrack import attribute_event, build_factory_index
-from src.config import CONFIG as _cfg
+from config import CONFIG as _cfg
 
 _ALERT_LOG_PATH:     str = _cfg.alert_log_path
 _SHIELD_WEBHOOK_URL: str = _cfg.shield_webhook_url

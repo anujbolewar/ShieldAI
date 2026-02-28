@@ -46,7 +46,7 @@ import pathway as pw
 
 from src import persistence as _persistence
 from src import zscore as _zscore
-from src.config import CONFIG as _cfg
+from config import CONFIG as _cfg
 
 # ---------------------------------------------------------------------------
 # Module logger — handlers configured by the caller, not this module

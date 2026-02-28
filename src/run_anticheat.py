@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from src.anti_cheat import run_all_detectors
-from src.config import CONFIG as _cfg
+from config import CONFIG as _cfg
 
 _FACTORY_DATA_DIR: str = _cfg.factory_data_directory
 _TAMPER_LOG_PATH:  str = _cfg.tamper_log_path

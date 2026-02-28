@@ -49,7 +49,7 @@ import time
 
 import pathway as pw
 
-from src.config import CONFIG as _cfg
+from config import CONFIG as _cfg
 from src.metrics import LatencyCollector, MetricsReporter, format_latency_summary
 
 logger: logging.Logger = logging.getLogger(__name__)

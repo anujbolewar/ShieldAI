@@ -18,7 +18,7 @@ Usage
 import pathway as pw
 
 from src.ingest import load_factory_streams, load_clean_factory_stream
-from src.config import CONFIG as _cfg
+from config import CONFIG as _cfg
 
 _FACTORY_DATA_DIR: str = _cfg.factory_data_directory
 
