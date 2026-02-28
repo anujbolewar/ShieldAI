@@ -54,22 +54,16 @@ The same chemical spill does different damage depending on where it happens. Pum
 ## Project Structure
 ```bash
 .
-├── src/
-│   ├── ingest.py         # Reads data from the message queue
-│   ├── validation.py     # Drops rows with missing or bad data
-│   ├── windowed_stats.py # Calculates rolling averages and spread
-│   ├── zscore.py         # Finds anomalies using math
-│   ├── persistence.py    # Stops single-tick false alarms
-│   ├── multivariate.py   # Combines sensors into one score
-│   ├── attribution.py    # Finds the worst broken sensor
-│   ├── eri.py            # Adjusts danger by river health
-│   ├── alerts.py         # Decides who gets paged right now
-│   ├── metrics.py        # Logs system latency and counts
-│   └── logger.py         # Standardizes our terminal output
-├── config.py             # All strict settings in one place
-├── demo_script.py        # Fake a whole incident end-to-end
-├── inject_anomaly.py     # Poke the system with bad data
-└── main.py               # Wires it all together and runs it
+├── docs/              # Architecture and methodology documentation
+├── src/               # Core application logic and pipeline stages
+├── tests/             # Unit and integration test suite
+├── tools/             # CLI utilities for data simulation and injection
+├── .env.example       # Template for environment variables
+├── .gitignore         # Untracked files and cache exclusions
+├── app.py             # Additional application entrypoint
+├── config.py          # Centralized configuration constants
+├── main.py            # Primary entry point for the pipeline
+└── pyproject.toml     # Dependency and metadata management
 ```
 
 ## Getting Started
@@ -84,12 +78,6 @@ Step 3 — Run
 ```bash
 # Start the pipeline
 python main.py
-
-# Run the full demo (fast mode = compressed timing)
-python demo_script.py --fast
-
-# Manually fire a test anomaly
-python inject_anomaly.py --sensor-id pH --anomaly-type spike
 ```
 
 ## Configuration Quick Reference
