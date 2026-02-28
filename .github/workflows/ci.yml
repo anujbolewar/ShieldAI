@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install exact test requirements
+        pip install flake8 mypy pytest pytest-asyncio anyio pathway httpx pandas-stubs types-requests
+        # Install project requirements
+        if [ -f pyproject.toml ]; then pip install -e .; fi
+        
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 src tests main.py config.py tools/simulate_factories.py --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings, acting as a strictness gauge
+        flake8 src tests main.py config.py tools/simulate_factories.py --count --max-line-length=100 --statistics
+        
+    - name: Type check with mypy
+      run: |
+        mypy src tests main.py config.py tools/simulate_factories.py
+        
+    - name: Test with pytest
+      run: |
+        PYTHONPATH=$(pwd) pytest tests/ -v
